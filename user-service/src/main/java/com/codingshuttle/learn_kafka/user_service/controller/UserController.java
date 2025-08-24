@@ -1,5 +1,7 @@
 package com.codingshuttle.learn_kafka.user_service.controller;
 
+import com.codingshuttle.learn_kafka.user_service.dto.CreateUserRequestDto;
+import com.codingshuttle.learn_kafka.user_service.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,11 +16,17 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-
+    private final UserService userService;
     @Value("${kafka.topic.user-random-topic}")
     private String KAFKA_RANDOM_USER_TOPIC;
 
     @PostMapping
+    public ResponseEntity<String> createUser(@RequestBody CreateUserRequestDto createUserRequestDto) {
+        userService.createUser(createUserRequestDto);
+        return ResponseEntity.ok("User is created");
+    }
+
+    @PostMapping("/{message}")
     public ResponseEntity<String> createUser(@PathVariable String message) {
         for (int i = 0; i < 1000; i++) {
             kafkaTemplate.send(KAFKA_RANDOM_USER_TOPIC, "" + i % 2, message + i);
