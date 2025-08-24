@@ -1,8 +1,8 @@
 package com.codingshuttle.learn_kafka.user_service.service;
 
+import com.codingshuttle.learnKafka.event.UserCreatedEvent;
 import com.codingshuttle.learn_kafka.user_service.dto.CreateUserRequestDto;
 import com.codingshuttle.learn_kafka.user_service.entity.User;
-import com.codingshuttle.learn_kafka.user_service.events.UserCreatedEvent;
 import com.codingshuttle.learn_kafka.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

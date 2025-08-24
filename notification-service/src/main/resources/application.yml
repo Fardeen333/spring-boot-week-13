@@ -8,3 +8,9 @@ spring:
       properties:
         spring.json:
           trusted.packages: com.codingshuttle.learnKafka.*
+        schema:
+          registry:
+            url: "http://127.0.0.1:8081"
+        specific:
+          avro:
+            reader: "true"
